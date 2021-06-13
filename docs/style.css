@@ -1,0 +1,133 @@
+:root {
+  --color: aqua;
+  --white30: rgba(255, 255, 255, 0.3);
+  --white40: rgba(255, 255, 255, 0.4);
+  --white50: rgba(255,255,255,0.5);
+  --white60: rgba(255, 255, 255, 0.6);
+  
+  --black: black;
+  --black50: rgba(0,0,0,0.5);
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body{
+  background: var(--color) url(https://a-static.besthdwallpaper.com/triangulos-de-colores-papel-pintado-3554x1999-47_53.jpg);
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+div.containerP{
+  width: 100%;
+  min-height: 100%;
+  padding: 0.625rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+div.grid div.sectionP {
+  padding: 0.3125rem;
+  backdrop-filter: blur(0.3125rem);
+  background-color: var(--white40);
+  border: 0.0625rem solid var(--white50);
+  border-radius: 0.625rem;
+  overflow: hidden;
+  transition: border  0.5s ease .1s;
+}
+div.grid div.sectionP:hover {
+  border: 0.0625rem solid black;
+}
+
+h1, h3 {
+  text-align: center;
+}
+.grid {
+  display: grid;
+  gap: 0.625rem;
+  width: 100%;
+}
+.grid1 {
+  grid-template-columns: minmax(0, 70%) minmax(0, calc(30% - 0.625rem));
+  grid-template-areas: "title title"
+                       "canvas options";
+}
+.grid2 {
+  margin-top: 0.625rem;
+  grid-template-columns: 30% auto;
+  grid-template-areas: "recommendatios resources";
+}
+
+.title {
+  grid-area: title;
+}
+
+.canvas {
+  grid-area: canvas;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.canvas canvas {
+  border: 0.1875rem solid black;
+}
+
+div div.grid div.options {
+  grid-area: options;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  padding-left: 0.625rem;
+}
+.options div {
+  margin: 0.3125rem;
+}
+.options p {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  align-items: center;
+}
+.options p.eraser{
+  grid-template-columns: auto minmax(70%, 100%);
+}
+.options p.eraser input {
+  margin-right: 0.5rem;
+}
+
+.recommendatios {
+  grid-area: recommendatios;
+}
+
+.resources {
+  grid-area: resources;
+}
+.btn {
+  padding: 0 0.3125rem;
+  text-align: center;
+}
+.btnOption {
+  padding: 0.4688rem 0.7813rem;
+  margin: 0.625rem 0;
+  max-width: 15.625rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+.btn, input, select {
+  background-color: var(--white50);
+  color: var(--black);
+  border-radius: 0.3125rem;
+  border: none;
+  transition: transform 0.5s ease .2s, border 0.5s ease .2s;
+  box-shadow: 0.3125rem 0.25rem 0.625rem 0.125rem var(--black50);
+}
+.btn:hover, input:hover {
+  transform: scale(1.05);
+  border: 0.0625rem solid var(--black50);
+}
+.btnOption:hover{
+  transform: scale(1.05)translateX(-50%);
+}

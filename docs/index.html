@@ -2,78 +2,126 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Dibuja con solo una linea</title>
-    <link rel="stylesheet" href="docs/style.css">
+    <title>Dibuja!</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="//static.platzi.com/media/favicons/platzi_favicon.png">
+    <meta name="author" content="WolTe" />
+    <meta name="description" content="Una pagina para dibujar mediante el canvas.">
+    <meta name="keywords" content="dibujar,paint,canvas,16 9">
   </head>
   <body>
-    <p> <h1>
-      Mueve las flechas o el mause para empezar tu dibujo</h1></p>
-    <p>
-      <strong>Crear el lienzo</strong>
-      <br />
-      Ancho:
-      <input type="number" min="1" id="Ancho" placeholder="Example 300">
-      <br />
-      Alto:
-      <input type="number" min="1" id="Alto" placeholder="Example 300">
-    <br />
-      <input type="button" id="BotonDibujar" value="Dibujar">
-    </p>
-    <p>
-      <strong>Pincel</strong>
-      <br />
-      Color
-      <input type="color" id="Color1">
-      <br />
-      Tamaño
-      <input type="range" id="SizeBrush" min="1" max="100" value="1">
-      <br />
-      <input type="checkbox" id="Borrar">
-      Borrador
-      <br />
-      Pagina en blanco
-      <input type="button" id="BotonLimpiar" value="Limpiar">
-    </p>
-    <p>
-      <strong>Agregar un marco</strong>
-      <br />
-      Color
-      <input type="color" id="ColorMarco">
-      <br />
-      Grosor
-      <input type="range" id="SizeOutline" min="1" max="101" step="10">
-      <br />
-      <input type="button" id="BotonDibujarMarco" value="Dibujar">
-    </p>
-    <canvas id="Canvas" width="0" width="0"></canvas>
-    <p>
-      <strong>Recomendaciones:</strong>
-      <br />
-      Para dibujar con el mause es necesario que tenga el click sostenido y moverlo.
-      <br />
-      Dibujar el espacio de trabajo con el tamaño minimo.
-      <br />
-      Dibujar el marco de ultimo.
-    </p>
-    <p>
-      <h3>Recursos:</h3>
-      <p>
-        <strong>---Generador de relción 16:9---</strong>
-        <br />
-        Introdusca el alto
-        <input type="number" placeholder="1080" min="1" id="AltoAspecto">
-        <input type="button" id="BotonGenerar16_9" value="Generar">
-        <br />
-        <label id="Generador16_9"></label>
-        <input type="button" id="BotonAplicar16_9" value="Aplicar">
-        (Remplazara los valores qu esten en el Ancho y Alto de Crear el lienzo)
-      </p>
-    </p>
-    <script src="teclas.js">
+    <div class="containerP">
+      <div class="grid grid1">
+        <div class="title sectionP">
+          <p> <h1>
+            DIBUJA!
+          </h1></p>
+        </div>
+        <div id="containerCanvas" class="canvas sectionP">
+          <canvas id="Canvas" width="391.1111111111111" height="220"></canvas>
+        </div>
+        <div class="options sectionP">
+          <h3>
+            Opciones
+          </h3>
+            <strong>Modificar el lienzo</strong>
+            <div>
+              <p>
+                Ancho:
+                <input type="number" min="1" id="Ancho" placeholder="Example 300">
+              </p> 
+              <p>
+                Alto:
+                <input type="number" min="1" id="Alto" placeholder="Example 300">
+              </p>
+              <button class="btn btnOption" id="BotonDibujar">
+                Dibujar
+              </button>
+            </div>
+            <br>
+            <strong>Pincel</strong>
+            <div>
+              <p>
+                Color
+                <input type="color" id="Color1">
+              </p>
+              <p>
+                Tamaño
+                <input type="range" id="SizeBrush" min="1" max="100" value="1">
+              </p>
+            </div>
+            <br>
+            
+              <p class="eraser">
+                <input type="checkbox" id="Borrar">
+                Borrador
+              </p>
+            
+            <br>
+            
+              <button class="btn btnOption" id="BotonLimpiar">
+                Limpiar lienzo
+              </button>
+            
+            <br>
+            <strong>Agregar un marco</strong>
+            <div>
+              <p>
+                Color
+                <input type="color" id="ColorMarco">
+              </p> 
+              <p>
+                Grosor
+                <input type="range" id="SizeOutline" min="1" max="101" step="10">
+              </p>
+              <button class="btn btnOption" id="BotonDibujarMarco">
+                Dibujar
+              </button>
+            </div>
+        </div>
+      </div>
+      <div class="grid grid2">
+        <div class="recommendatiosresources sectionP">
+          <p>
+            <h3>Recomendaciones:</h3>
+            <br />
+            Dibuja con el mause y el teclado.
+            <br />
+            Dibujar el marco de ultimo.
+          </p>
+        </div>
+        <div class="resources sectionP">
+          <p>
+            <h3>Recursos:</h3>
+            <p>
+              <strong>---Generador de relción 16:9---</strong>
+              <br />
+              <select id="type16_9">
+                <option value="1">Alto</option>
+                <option value="">Ancho</option>
+              </select>
+              <input type="number" placeholder="1080" min="1" id="value16_9">
+              <button class="btn btnResources" id="BotonGenerar16_9">
+                Generar
+              </button>
+              <br />
+              <label id="Generador16_9"></label>
+              <button class="btn btnResources" id="BotonAplicar16_9">
+                Aplicar
+              </button>
+              (Remplazara los valores que esten en el Ancho y Alto de Modificar el lienzo)
+            </p>
+          </p>
+          
+        </div>
+      </div>
+    </div>
+    <script src="teclas.js" defer>
     </script>
     <!-- 
-      //TODO: guardar la imagen(escojer el formato y nombre)
-      //FIXME: "si se agrgan mas recursos hacrlos lista", hacer que haga la aclaracion del boton aplicar cuando se ponga el mause encima y no sea como una linea mas
+      TODO: guardar la imagen(escojer el formato y nombre)
+      FIXME: "si se agrgan mas recursos hacrlos lista", hacer que haga la aclaracion del boton aplicar cuando se ponga el mause encima y no sea como una linea mas
     -->
   </body>
 </html>
