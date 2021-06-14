@@ -22,32 +22,42 @@
           <canvas id="Canvas" width="391.1111111111111" height="220"></canvas>
         </div>
         <div class="options sectionP">
-          <h3>
+          <h3 class="titleOptions">
             Opciones
           </h3>
+          <div class="ml">
             <strong>Modificar el lienzo</strong>
-            <div>
+            <div> 
               <p>
-                Ancho:
+                <label>
+                  Ancho:
+                </label>
                 <input type="number" min="1" id="Ancho" placeholder="Example 300">
               </p> 
               <p>
-                Alto:
+                <label>
+                  Alto:
+                </label>
                 <input type="number" min="1" id="Alto" placeholder="Example 300">
               </p>
               <button class="btn btnOption" id="BotonDibujar">
                 Dibujar
               </button>
             </div>
-            <br>
+          </div>
+          <div class="pnl">
             <strong>Pincel</strong>
             <div>
               <p>
-                Color
+                <label>
+                  Color
+                </label>
                 <input type="color" id="Color1">
               </p>
               <p>
-                Tamaño
+                <label>
+                  Tamaño
+                </label>
                 <input type="range" id="SizeBrush" min="1" max="100" value="1">
               </p>
             </div>
@@ -58,31 +68,36 @@
                 Borrador
               </p>
             
-            <br>
-            
-              <button class="btn btnOption" id="BotonLimpiar">
-                Limpiar lienzo
-              </button>
-            
-            <br>
+          </div>
+          <div class="lpmL">
+            <button class="btn btnOption" id="BotonLimpiar">
+              Limpiar lienzo
+            </button>
+          </div>
+          <div class="addM">
             <strong>Agregar un marco</strong>
             <div>
               <p>
-                Color
+                <label>
+                  Color
+                </label>
                 <input type="color" id="ColorMarco">
               </p> 
               <p>
-                Grosor
+                <label>
+                  Grosor
+                </label>
                 <input type="range" id="SizeOutline" min="1" max="101" step="10">
               </p>
               <button class="btn btnOption" id="BotonDibujarMarco">
                 Dibujar
               </button>
             </div>
+          </div>
         </div>
       </div>
       <div class="grid grid2">
-        <div class="recommendatiosresources sectionP">
+        <div class="recommendatios sectionP">
           <p>
             <h3>Recomendaciones:</h3>
             <br />
@@ -92,36 +107,51 @@
           </p>
         </div>
         <div class="resources sectionP">
-          <p>
             <h3>Recursos:</h3>
-            <p>
-              <strong>---Generador de relción 16:9---</strong>
-              <br />
-              <select id="type16_9">
-                <option value="1">Alto</option>
-                <option value="">Ancho</option>
-              </select>
-              <input type="number" placeholder="1080" min="1" id="value16_9">
-              <button class="btn btnResources" id="BotonGenerar16_9">
-                Generar
-              </button>
-              <br />
-              <label id="Generador16_9"></label>
-              <button class="btn btnResources" id="BotonAplicar16_9">
-                Aplicar
-              </button>
-              (Remplazara los valores que esten en el Ancho y Alto de Modificar el lienzo)
-            </p>
-          </p>
-          
+            <div class="rsrs g16:9">
+              <strong>
+                ---Generador de relción 16:9---
+              </strong>
+              <div class="contRsrs">
+                <select id="type16_9">
+                  <option value="1">Alto</option>
+                  <option value="">Ancho</option>
+                </select>
+                <input type="number" placeholder="1080" min="1" id="value16_9">
+                <button class="btn btnResources" id="BotonGenerar16_9">
+                  Generar
+                </button>
+                <br />
+                <label id="Generador16_9"></label>
+                <button class="btn btnResources" id="BotonAplicar16_9">
+                  Aplicar
+                </button>
+                (Remplazara los valores que esten en el Ancho y Alto de Modificar el lienzo)
+              </div>
+            </div>
+            <div class="rsrs download">
+              <strong>
+                ---Descarga tu dibujo---
+              </strong>
+              <div class="contRsrs">
+                <button id="btnPng" class="btn png">
+                  PNG
+                </button>
+                <button id="btnJpg" class="btn jpg">
+                  JPG
+                </button>
+                (Has click en la imagen para descargar)
+              </div>
+            </div>
         </div>
       </div>
     </div>
+    <div id="canvasImg"></div>
     <script src="teclas.js" defer>
     </script>
     <!-- 
       TODO: guardar la imagen(escojer el formato y nombre)
-      FIXME: "si se agrgan mas recursos hacrlos lista", hacer que haga la aclaracion del boton aplicar cuando se ponga el mause encima y no sea como una linea mas
+      FIXME: hacer que las aclaracion de botones se hagan al poner el mause encima y no sea como una linea mas
     -->
   </body>
 </html>

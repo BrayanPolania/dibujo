@@ -1,57 +1,45 @@
-const containerCanvas= document.getElementById("containerCanvas");
-const sizeCanvas = containerCanvas.offsetWidth;
-const canvas = document.getElementById("Canvas");
-const alto = document.getElementById("Alto");
-const ancho = document.getElementById("Ancho");
-const type16_9 = document.getElementById("type16_9");
-const value16_9 = document.getElementById("value16_9");
-const color_1 = document.getElementById("Color1");
-const colorMarco = document.getElementById("ColorMarco");
-const botonDibujar = document.getElementById("BotonDibujar");
-const botonLimpiar = document.getElementById("BotonLimpiar");
-const botonDibujarMarco = document.getElementById("BotonDibujarMarco");
-const botonGenerar16_9 = document.getElementById("BotonGenerar16_9");
-const botonAplicar16_9 = document.getElementById("BotonAplicar16_9");
-const pGenerador = document.getElementById("Generador16_9");
-const sizeBrush = document.getElementById("SizeBrush");
-const sizeOutline = document.getElementById("SizeOutline");
-const borrar = document.getElementById("Borrar");
-const lienzo = canvas.getContext("2d");
-const teclas = {
-  UP: 38,
-  DOWN: 40,
-  LEFT: 37,
-  RIGHT: 39,
-};
-let x;
-let y;
-let estado;
-let color1;
-let alto9;
-let ancho16;
+/*-----------------------VARIABLES---------------------------*/
+const
+  containerCanvas= document.getElementById("containerCanvas"),
+  sizeCanvas = containerCanvas.offsetWidth,
+  canvas = document.getElementById("Canvas"),
+  alto = document.getElementById("Alto"),
+  ancho = document.getElementById("Ancho"),
+  type16_9 = document.getElementById("type16_9"),
+  value16_9 = document.getElementById("value16_9"),
+  color_1 = document.getElementById("Color1"),
+  colorMarco = document.getElementById("ColorMarco"),
+  botonDibujar = document.getElementById("BotonDibujar"),
+  botonLimpiar = document.getElementById("BotonLimpiar"),
+  botonDibujarMarco = document.getElementById("BotonDibujarMarco"),
+  botonGenerar16_9 = document.getElementById("BotonGenerar16_9"),
+  botonAplicar16_9 = document.getElementById("BotonAplicar16_9"),
+  pGenerador = document.getElementById("Generador16_9"),
+  sizeBrush = document.getElementById("SizeBrush"),
+  sizeOutline = document.getElementById("SizeOutline"),
+  borrar = document.getElementById("Borrar"),
+  btnPng = document.getElementById("btnPng"),
+  btnJpg = document.getElementById("btnJpg"),
+  canvasImg = document.getElementById("canvasImg"),
+  lienzo = canvas.getContext("2d"),
+  teclas = {
+    UP: 38,
+    DOWN: 40,
+    LEFT: 37,
+    RIGHT: 39,
+  };
+let 
+  x, y, estado, color1, alto9, ancho16;
 
-console.log(sizeCanvas);
+/*-----------------------FUNCIONES---------------------------*/
+
 const primerCanvas = () => {
   let anchof =  sizeCanvas*0.965;
   let altof = (anchof*9)/16;
   canvas.width = anchof;
   canvas.height = altof;
+  dibujarLimpiar();
 }
-primerCanvas();
-dibujarLimpiar();
-
-document.addEventListener("keydown", dibujarTeclas);
-canvas.addEventListener("mousedown", dibujarMouseDown);
-canvas.addEventListener("mousemove", dibujarMouseMove);
-document.addEventListener("mouseup", pararMouse);
-botonDibujar.addEventListener("click", dibujarCanvas);
-botonLimpiar.addEventListener("click", dibujarLimpiar);
-botonDibujarMarco.addEventListener("click", dibujarMarco);
-botonGenerar16_9.addEventListener("click", generador16_9);
-botonAplicar16_9.addEventListener("click", aplicar16_9);
-type16_9.addEventListener("change", () =>{(type16_9.value) ? value16_9.placeholder = "1080" : value16_9.placeholder = "1920";
-});
-
 
 function aplicar16_9() {
   alto.value = alto9;
@@ -63,7 +51,6 @@ function dibujarMarco() {
   let altof = canvas.height;
   let colorM = colorMarco.value;
   let grosorMarco = sizeOutline.value;
-
 
   dibujarLineaGrosor(colorM, grosorMarco, 1, 1, 1, altof - 1);
   dibujarLineaGrosor(colorM, grosorMarco, 1, altof - 1, anchof - 1, altof - 1);
@@ -83,11 +70,7 @@ function generador16_9() {
     if (ancho16==""){ancho16="0";}//alto9 = 0, si no tine valor
     alto9 = (ancho16*9)/16;
     pGenerador.innerHTML = `El alto es: ${alto9}<br />Las dimensiones son ${ancho16} x ${alto9}<br />`;
-  }
-
-
-
-  
+  }  
 }
 
 //dibujar una linea con cierto grosor
@@ -112,6 +95,9 @@ function dibujarBorrar() {
 }
 
 function dibujarLimpiar() {
+  canvas.width = canvas.width;
+  canvas.height = canvas.height;
+  
   lienzo.fillStyle = "white";
   lienzo.fillRect(0, 0, canvas.width, canvas.height);
 }
@@ -124,6 +110,7 @@ function dibujarCanvas() {
 
   canvas.width = anchof;
   canvas.height = altof;
+  dibujarLimpiar();
 }
 
 function dibujarMouseDown() {
@@ -138,7 +125,7 @@ function dibujarMouseMove(evento) {
   if (estado == 1) {
     x = evento.layerX;
     y = evento.layerY;
-    dibujarBorrar()
+    dibujarBorrar();
     dibujarLinea(color1, x, y, x, y);
   }
 }
@@ -183,8 +170,51 @@ function dibujarLinea(color, x_inicial, y_inicial, x_final, y_final) {
   lienzo.closePath();
 }
 
+function guardarCanvas(sourceUrl) {
+  //canvasImg.textContent = "";
+  canvasImg.innerHTML = `
+  <a href=${sourceUrl} download>
+  <img src=${sourceUrl} alt="Imagen">
+  </a>`;
+}
+
+/*------------------------CODIGO-----------------------------*/
+
+btnJpg.addEventListener("click", () => {
+  canvasImg.style.transform= "translateY(150%)";
+  guardarCanvas(canvas.toDataURL("image/jpeg"))
+})
+btnPng.addEventListener("click", () => {
+  canvasImg.style.transform= "translateY(150%)";
+  guardarCanvas(canvas.toDataURL("image/png"))
+})
+canvasImg.addEventListener("click", () => {
+  canvasImg.style.transform= "translateY(0)";
+})
+/* function displayRules () {
+  rules.style.transform= "translateY(100vh)";
+}
+function closeRules () {
+  rules.style.transform= "translateY(0)";
+}
+*/
+document.addEventListener("keydown", dibujarTeclas);
+canvas.addEventListener("mousedown", dibujarMouseDown);
+canvas.addEventListener("mousemove", dibujarMouseMove);
+document.addEventListener("mouseup", pararMouse);
+botonDibujar.addEventListener("click", dibujarCanvas);
+botonLimpiar.addEventListener("click", dibujarLimpiar);
+botonDibujarMarco.addEventListener("click", dibujarMarco);
+botonGenerar16_9.addEventListener("click", generador16_9);
+botonAplicar16_9.addEventListener("click", aplicar16_9);
+
+type16_9.addEventListener("change", () =>{(type16_9.value) ? value16_9.placeholder = "1080" : value16_9.placeholder = "1920";
+});
+
+console.log(sizeCanvas);
+primerCanvas();
 
 
 
-//TODO: Comentar - depurar?
+//TODO: Comentar - depurar?, agregar el tamaño y los demas apartados en el loval estorage.
 //FIXME: borrador(colorear blanco a colorear transparente o borrar)
