@@ -34,7 +34,7 @@ let
 /*-----------------------FUNCIONES---------------------------*/
 
 const primerCanvas = () => {
-  let anchof =  sizeCanvas*0.965;
+  let anchof =  sizeCanvas*0.9;
   let altof = (anchof*9)/16;
   canvas.width = anchof;
   canvas.height = altof;
@@ -121,10 +121,20 @@ function pararMouse() { /*cuando se levanta el click*/
   estado = 0;
 }
 
-function dibujarMouseMove(evento) {
+function dibujarMouseMove(e) {
   if (estado == 1) {
-    x = evento.layerX;
-    y = evento.layerY;
+    x = e.layerX;
+    y = e.layerY;
+    dibujarBorrar();
+    dibujarLinea(color1, x, y, x, y);
+  }
+}
+function dibujarTouchMove(e) {
+  //window.scroll(0,0);
+  if (estado == 1) {
+    const canvasXT = canvas.getBoundingClientRect();
+    x = e.touches[0].clientX-canvasXT.x;
+    y = e.touches[0].clientY-canvasXT.y;
     dibujarBorrar();
     dibujarLinea(color1, x, y, x, y);
   }
@@ -170,6 +180,15 @@ function dibujarLinea(color, x_inicial, y_inicial, x_final, y_final) {
   lienzo.closePath();
 }
 
+function saveLocalStorage(key, value) {
+  localStorage.setItem(key, value);
+}
+function resetWithLocalStorage (key, value) {
+  if (localStorage.getItem(key)) {
+    value.value = localStorage.getItem(key);
+  }
+}
+
 function guardarCanvas(sourceUrl) {
   //canvasImg.textContent = "";
   canvasImg.innerHTML = `
@@ -179,7 +198,7 @@ function guardarCanvas(sourceUrl) {
 }
 
 /*------------------------CODIGO-----------------------------*/
-
+/*listeners*/
 btnJpg.addEventListener("click", () => {
   canvasImg.style.transform= "translateY(150%)";
   guardarCanvas(canvas.toDataURL("image/jpeg"))
@@ -191,13 +210,7 @@ btnPng.addEventListener("click", () => {
 canvasImg.addEventListener("click", () => {
   canvasImg.style.transform= "translateY(0)";
 })
-/* function displayRules () {
-  rules.style.transform= "translateY(100vh)";
-}
-function closeRules () {
-  rules.style.transform= "translateY(0)";
-}
-*/
+
 document.addEventListener("keydown", dibujarTeclas);
 canvas.addEventListener("mousedown", dibujarMouseDown);
 canvas.addEventListener("mousemove", dibujarMouseMove);
@@ -207,9 +220,26 @@ botonLimpiar.addEventListener("click", dibujarLimpiar);
 botonDibujarMarco.addEventListener("click", dibujarMarco);
 botonGenerar16_9.addEventListener("click", generador16_9);
 botonAplicar16_9.addEventListener("click", aplicar16_9);
+//touch
+canvas.addEventListener("touchstart", dibujarMouseDown);
+document.addEventListener("touchend", pararMouse);
+canvas.addEventListener("touchmove",dibujarTouchMove);
 
 type16_9.addEventListener("change", () =>{(type16_9.value) ? value16_9.placeholder = "1080" : value16_9.placeholder = "1920";
 });
+
+sizeBrush.addEventListener("change", () =>
+  saveLocalStorage("SizeBrush", sizeBrush.value)
+);
+color_1.addEventListener("change", () =>
+  saveLocalStorage("ColorBrush", color_1.value)
+  );
+  /*--listeners*/
+
+resetWithLocalStorage("SizeBrush", sizeBrush);
+resetWithLocalStorage("ColorBrush", color_1);
+
+
 
 console.log(sizeCanvas);
 primerCanvas();
@@ -218,3 +248,6 @@ primerCanvas();
 
 //TODO: Comentar - depurar?, agregar el tamaño y los demas apartados en el loval estorage.
 //FIXME: borrador(colorear blanco a colorear transparente o borrar)
+
+
+

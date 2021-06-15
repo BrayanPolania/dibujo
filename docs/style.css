@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
 :root {
   --color: rgb(59, 192, 192);
   --white30: rgba(255, 255, 255, 0.3);
@@ -13,6 +14,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Pangolin', cursive;
 }
 body{
   background: var(--color) url(https://a-static.besthdwallpaper.com/triangulos-de-colores-papel-pintado-3554x1999-47_53.jpg);
@@ -27,6 +29,7 @@ body{
   align-items: center;
   justify-content: center;
   position: relative;
+  font-size: 1.24vw;
 }
 div.containerP{
   width: 100%;
@@ -40,7 +43,27 @@ div.containerP{
 .btn, select {
   cursor: pointer;
 }
+#Alto, #Ancho, #value16_9 {
+  padding-left: 0.3125rem;
+}
 
+/* Scroll Personalizado */
+*::-webkit-scrollbar {
+	width: 10px;
+  height: 10px;
+	background: rgba(255, 178, 42, 0.6);
+  border-radius: 10px;
+}
+body::-webkit-scrollbar {
+  border-radius: 0;
+  background: #ffb22a;
+}
+*::-webkit-scrollbar-thumb {
+	/* background: rgba(255,255,255, .3); */
+  border: 1px solid #000;
+	border-radius: 10px;
+}
+/* Scroll Personalizado */
 
 div.grid div.sectionP {
   padding: 0.3125rem;
@@ -64,7 +87,7 @@ h1, h3 {
   width: 100%;
 }
 .grid1 {
-  grid-template-columns: minmax(0, 70%) minmax(0, calc(30% - 0.625rem));
+  grid-template-columns: 70% calc(30% - 0.625rem);
   grid-template-areas: "title title"
                        "canvas options";
 }
@@ -78,13 +101,15 @@ h1, h3 {
   grid-area: title;
 }
 
-.canvas {
+div div .sectionP.canvas {
   grid-area: canvas;
+  width: 100%;
+  max-height: 90vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: auto;
 }
 .canvas canvas {
+  margin: auto;
   border: 0.1875rem solid black;
 }
 
@@ -220,23 +245,30 @@ div div.grid div.options {
   width: 100%;
   height: 100%;
 } 
+
+
 /*-----------------------MOBILE---------------------------*/
+@media (max-width: 780px) {
+  body {
+    font-size: 1.7vh;
+
+  }
+}
 @media (max-width: 430px) {
 
+  body {
+    height: 100vh;
+    overflow: hidden;
+  }
   .grid1 {
+    height: 80%;
     grid-template-columns: 1fr;
     grid-template-areas: "title"
                          "canvas"
                          "options";
   }
-  .grid2 {
-    margin-top: 0.625rem;
-    grid-template-columns: 1fr;
-    grid-template-areas: "resources"
-                         "recommendatios";
-  }
-  
   div div div.options.sectionP {
+    overflow: auto;
     grid-template-columns: 50% 50%;
     grid-template-rows: auto auto auto ;
     grid-template-areas: "titleOptions titleOptions"
@@ -259,5 +291,19 @@ div div.grid div.options {
   }
   .options .eraser #Borrar {
     margin: 0;
+  }
+
+  .grid2 {
+    height: 20%;
+    margin-top: 0.625rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100%;
+    grid-template-areas: "resources";
+  }
+  div .grid2 div.sectionP {
+    overflow: auto;
+  }
+  div .grid2 div.recommendatios{
+    display: none;
   }
 }
